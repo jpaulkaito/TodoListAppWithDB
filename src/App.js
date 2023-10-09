@@ -115,7 +115,7 @@ function App() {
     <div className="App">
       <Header />
       <Routes>
-        <Route path='TodoListAppWithDB/'
+        <Route path='TodoListApp/'
           element={
             <HomePage
               todoList={todoList}
@@ -125,7 +125,7 @@ function App() {
             />
           }
         />
-        <Route path='TodoListAppWithDB/View-all'
+        <Route path='TodoListApp/View-all'
           element={
             <ViewAllTodoPage
               todoList={todoList}
@@ -134,7 +134,7 @@ function App() {
             />
           }
         />
-        <Route path='TodoListAppWithDB/Search'
+        <Route path='TodoListApp/Search'
           element={<SearchPage
             todoList={todoList}
             handleDelete={handleDelete}
@@ -142,10 +142,10 @@ function App() {
           />
           }
         />
-        <Route path='TodoListAppWithDB/About'
+        <Route path='TodoListApp/About'
           element={<AboutPage />}
         />
-        <Route path='TodoListAppWithDB/Contact'
+        <Route path='TodoListApp/Contact'
           element={<ContactPage />}
         />
       </Routes>
