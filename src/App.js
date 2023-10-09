@@ -7,6 +7,7 @@ import SearchPage from './pages/SearchPage';
 import ContactPage from './pages/ContactPage';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import { baseUrl } from './app/shared/baseUrl';
 import './App.css';
 
 
@@ -15,7 +16,7 @@ function App() {
 
   useEffect(() => {
     // Fetch todo items from the server when the component mounts
-    fetch('http://localhost:5000/api/todos/')
+    fetch(baseUrl)
       .then(response => response.json())
       .then(data => setTodoList(data))
       .catch(error => console.error('Error fetching todo items:', error));
@@ -24,7 +25,7 @@ function App() {
   const handleCreate = (newTask) => {
     setTodoList((prevFilteredItems) => [...prevFilteredItems, newTask]);
     // Make a POST request to the server to create a new todo
-    fetch('http://localhost:5000/api/todos', {
+    fetch(baseUrl, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -34,7 +35,7 @@ function App() {
       .then(response => response.json())
       .then(() => {
         // Fetch the updated todo list from the server
-        fetch('http://localhost:5000/api/todos/')
+        fetch(baseUrl)
           .then(response => response.json())
           .then(data => setTodoList(data))
           .catch(error => console.error('Error fetching todo items:', error));
@@ -44,7 +45,7 @@ function App() {
 
   const handleDelete = (_id) => {
     // Make a DELETE request to the server to delete the todo
-    fetch(`http://localhost:5000/api/todos/${_id}`, {
+    fetch(`${baseUrl}${_id}`, {
       method: 'DELETE',
     })
       .then(response => {
@@ -61,7 +62,11 @@ function App() {
   };
 
   const handleUpdate = (updatedTask) => {
-    const taskIndex = todoList.findIndex((task) => task.id === updatedTask.id);
+    console.log('Updated task _id:', updatedTask._id);
+    
+    const taskIndex = todoList.findIndex((task) => task._id === updatedTask._id);
+    
+    console.log('Task index:', taskIndex);
 
     if (taskIndex !== -1) {
       setTodoList((prevTodoList) => {
@@ -69,6 +74,22 @@ function App() {
         updatedList[taskIndex] = updatedTask;
         return updatedList;
       });
+  
+      // Make a PUT request to update the task on the server
+      fetch(`${baseUrl}${updatedTask._id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(updatedTask)
+      })
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+          return response.json();
+        })
+        .catch(error => console.error('Error updating todo:', error));
     }
   };
 

@@ -9,7 +9,7 @@ const EditTodoForm = ({ todoList, handleUpdate }) => {
     const handleSubmit = (values) => {
         if (values.newTaskTitle && values.newTaskDescription && values.date) {
             const updateTodo = {
-                id: todoList.id,
+                _id: todoList._id,
                 title: values.newTaskTitle,
                 description: values.newTaskDescription,
                 status: values.newTaskStatus === 'Pending' ? 'Pending' : 'Completed',
