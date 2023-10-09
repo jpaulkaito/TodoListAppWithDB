@@ -15,11 +15,11 @@ const Header = () => {
 
     return (
         <Navbar dark color='primary' sticky='top' expand='md'>
-            {/* <NavbarBrand className='ms-5' href='TodoListApp/'>
+            {/* <NavbarBrand className='ms-5' href='TodoListAppWithDB/'>
                 <img src={NucampLogo} alt='nucamp logo' className='float-start' />
                 <h1 className='mt-1'>My Monthly To-Do List</h1>
             </NavbarBrand> */}
-            <Link to="/TodoListApp/" className="navbar-brand ms-5">
+            <Link to="/TodoListAppWithDB/" className="navbar-brand ms-5">
                 <img src={NucampLogo} alt="nucamp logo" className="float-start" />
                 <h1 className="mt-1">My Monthly To-Do List</h1>
             </Link>
@@ -27,27 +27,27 @@ const Header = () => {
             <Collapse isOpen={menuOpen} navbar>
                 <Nav className='ms-auto' navbar>
                     <NavItem>
-                        <NavLink className='nav-link' to='TodoListApp/'>
+                        <NavLink className='nav-link' to='TodoListAppWithDB/'>
                             <i className='fa fa-home fa-lg' /> Home
                         </NavLink>
                     </NavItem>
                     <NavItem>
-                        <NavLink className='nav-link' to='TodoListApp/View-all'>
+                        <NavLink className='nav-link' to='TodoListAppWithDB/View-all'>
                             <i className='fa fa-list fa-lg' /> View All
                         </NavLink>
                     </NavItem>
                     <NavItem>
-                        <NavLink className='nav-link' to='TodoListApp/Search'>
+                        <NavLink className='nav-link' to='TodoListAppWithDB/Search'>
                             <i className='fa fa-search fa-lg' /> Search
                         </NavLink>
                     </NavItem>
                     <NavItem>
-                        <NavLink className='nav-link' to='TodoListApp/About'>
+                        <NavLink className='nav-link' to='TodoListAppWithDB/About'>
                             <i className='fa fa-info fa-lg' /> About
                         </NavLink>
                     </NavItem>
                     <NavItem>
-                        <NavLink className='nav-link' to='TodoListApp/Contact'>
+                        <NavLink className='nav-link' to='TodoListAppWithDB/Contact'>
                             <i className='fa fa-address-card fa-lg' /> Contact
                         </NavLink>
                     </NavItem>

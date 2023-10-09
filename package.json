@@ -1,6 +1,6 @@
 {
-  "homepage": "https://jpaulkaito.github.io/TodoListApp/",
-  "name": "todolistapp",
+  "homepage": "https://jpaulkaito.github.io/TodoListAppWithDB/",
+  "name": "todolistappwithdb",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

@@ -10,19 +10,19 @@ const Footer = () => {
                         <h5>Links</h5>
                         <ul className='list-unstyled'>
                             <li>
-                                <Link to='TodoListApp/'>Home</Link>
+                                <Link to='TodoListAppWithDB/'>Home</Link>
                             </li>
                             <li>
-                                <Link to='TodoListApp/View-all'>ViewAll</Link>
+                                <Link to='TodoListAppWithDB/View-all'>ViewAll</Link>
                             </li>
                             <li>
-                                <Link to='TodoListApp/Search'>Search</Link>
+                                <Link to='TodoListAppWithDB/Search'>Search</Link>
                             </li>
                             <li>
-                                <Link to='TodoListApp/About'>About</Link>
+                                <Link to='TodoListAppWithDB/About'>About</Link>
                             </li>
                             <li>
-                                <Link to='TodoListApp/contact'>Contact</Link>
+                                <Link to='TodoListAppWithDB/contact'>Contact</Link>
                             </li>
                         </ul>
                     </Col>
