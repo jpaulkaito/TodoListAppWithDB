@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { TODOITEMS } from './app/shared/TODOITEMS';
 import HomePage from './pages/HomePage';
@@ -12,16 +12,46 @@ import './App.css';
 
 
 function App() {
-  const [todoList, setTodoList] = useState(TODOITEMS);
+  const [todoList, setTodoList] = useState([]);
+
+  useEffect(() => {
+    // Fetch todo items from the server when the component mounts
+    fetch('http://localhost:5000/api/todos/')
+      .then(response => response.json())
+      .then(data => setTodoList(data))
+      .catch(error => console.error('Error fetching todo items:', error));
+  }, []);
 
   const handleCreate = (newTask) => {
     setTodoList((prevFilteredItems) => [...prevFilteredItems, newTask]);
+    // Make a POST request to the server to create a new todo
+    fetch('http://localhost:5000/api/todos', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(newTask) // Send the new task as the request body
+    })
+      .then(response => response.json())
+      .catch(error => console.error('Error creating todo:', error));
   }
 
-  const handleDelete = (id) => {
-    setTodoList((prevFilteredItems) =>
-      prevFilteredItems.filter((item) => item.id !== id)
-    );
+  const handleDelete = (_id) => {
+    // Make a DELETE request to the server to delete the todo
+    fetch(`http://localhost:5000/api/todos/${_id}`, {
+      method: 'DELETE',
+    })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then(() => {
+        // Remove the deleted todo from the todo list
+        setTodoList(prevFilteredItems => prevFilteredItems.filter(item => item._id !== _id));
+      })
+      .catch(error => console.error('Error deleting todo:', error));
   };
 
   const handleUpdate = (updatedTask) => {
@@ -64,7 +94,7 @@ function App() {
             todoList={todoList}
             handleDelete={handleDelete}
             handleUpdate={handleUpdate}
-        />
+          />
           }
         />
         <Route path='TodoListApp/About'
