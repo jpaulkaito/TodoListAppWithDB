@@ -10,16 +10,34 @@ import Footer from './components/Footer';
 import { baseUrl } from './app/shared/baseUrl';
 import './App.css';
 
+async function fetchData() {
+  try {
+    const response = await fetch(baseUrl);
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Error fetching todo items:', error);
+    throw error;
+  }
+}
 
 function App() {
   const [todoList, setTodoList] = useState([]);
 
   useEffect(() => {
-    // Fetch todo items from the server when the component mounts
-    fetch(baseUrl)
-      .then(response => response.json())
-      .then(data => setTodoList(data))
-      .catch(error => console.error('Error fetching todo items:', error));
+    async function fetchDataAsync() {
+      try {
+        const data = await fetchData();
+        setTodoList(data);
+      } catch (error) {
+        // Handle error if needed
+      }
+    }
+
+    fetchDataAsync();
   }, []);
 
   const handleCreate = (newTask) => {
@@ -63,9 +81,9 @@ function App() {
 
   const handleUpdate = (updatedTask) => {
     console.log('Updated task _id:', updatedTask._id);
-    
+
     const taskIndex = todoList.findIndex((task) => task._id === updatedTask._id);
-    
+
     console.log('Task index:', taskIndex);
 
     if (taskIndex !== -1) {
@@ -74,7 +92,7 @@ function App() {
         updatedList[taskIndex] = updatedTask;
         return updatedList;
       });
-  
+
       // Make a PUT request to update the task on the server
       fetch(`${baseUrl}${updatedTask._id}`, {
         method: 'PUT',
@@ -97,7 +115,7 @@ function App() {
     <div className="App">
       <Header />
       <Routes>
-        <Route path='TodoListApp/'
+        <Route path='TodoListAppWithDB/'
           element={
             <HomePage
               todoList={todoList}
@@ -107,7 +125,7 @@ function App() {
             />
           }
         />
-        <Route path='TodoListApp/View-all'
+        <Route path='TodoListAppWithDB/View-all'
           element={
             <ViewAllTodoPage
               todoList={todoList}
@@ -116,7 +134,7 @@ function App() {
             />
           }
         />
-        <Route path='TodoListApp/Search'
+        <Route path='TodoListAppWithDB/Search'
           element={<SearchPage
             todoList={todoList}
             handleDelete={handleDelete}
@@ -124,10 +142,10 @@ function App() {
           />
           }
         />
-        <Route path='TodoListApp/About'
+        <Route path='TodoListAppWithDB/About'
           element={<AboutPage />}
         />
-        <Route path='TodoListApp/Contact'
+        <Route path='TodoListAppWithDB/Contact'
           element={<ContactPage />}
         />
       </Routes>
