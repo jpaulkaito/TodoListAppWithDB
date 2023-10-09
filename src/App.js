@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import { TODOITEMS } from './app/shared/TODOITEMS';
 import HomePage from './pages/HomePage';
 import ViewAllTodoPage from './pages/ViewAllTodoPage';
 import AboutPage from './pages/AboutPage';
@@ -33,6 +32,13 @@ function App() {
       body: JSON.stringify(newTask) // Send the new task as the request body
     })
       .then(response => response.json())
+      .then(() => {
+        // Fetch the updated todo list from the server
+        fetch('http://localhost:5000/api/todos/')
+          .then(response => response.json())
+          .then(data => setTodoList(data))
+          .catch(error => console.error('Error fetching todo items:', error));
+      })
       .catch(error => console.error('Error creating todo:', error));
   }
 
