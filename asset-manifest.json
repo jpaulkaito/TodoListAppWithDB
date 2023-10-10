@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/TodoListAppWithDB/static/css/main.7f310b2b.css",
-    "main.js": "/TodoListAppWithDB/static/js/main.085486cf.js",
+    "main.js": "/TodoListAppWithDB/static/js/main.a1bc1304.js",
     "static/js/787.73e008ef.chunk.js": "/TodoListAppWithDB/static/js/787.73e008ef.chunk.js",
     "static/media/fontawesome-webfont.svg?v=4.7.0": "/TodoListAppWithDB/static/media/fontawesome-webfont.c1e38fd9e0e74ba58f7a.svg",
     "static/media/fontawesome-webfont.eot": "/TodoListAppWithDB/static/media/fontawesome-webfont.8b43027f47b20503057d.eot",
@@ -33,11 +33,11 @@
     "static/media/open-sans-latin-400italic.woff2": "/TodoListAppWithDB/static/media/open-sans-latin-400italic.bb915319f59c02c348a6.woff2",
     "index.html": "/TodoListAppWithDB/index.html",
     "main.7f310b2b.css.map": "/TodoListAppWithDB/static/css/main.7f310b2b.css.map",
-    "main.085486cf.js.map": "/TodoListAppWithDB/static/js/main.085486cf.js.map",
+    "main.a1bc1304.js.map": "/TodoListAppWithDB/static/js/main.a1bc1304.js.map",
     "787.73e008ef.chunk.js.map": "/TodoListAppWithDB/static/js/787.73e008ef.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.7f310b2b.css",
-    "static/js/main.085486cf.js"
+    "static/js/main.a1bc1304.js"
   ]
 }
