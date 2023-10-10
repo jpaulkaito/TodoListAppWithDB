@@ -49,7 +49,7 @@ const SearchTodoList = ({ todoList, handleDelete, handleUpdate }) => {
               <div key={date}>
                 <h4>{date}</h4>
                 {mergedItems[date].map((item) => (
-                  <div key={item.id} className="card mb-3">
+                  <div key={item._id} className="card mb-3">
                     <div className="card-body">
                       <h5 className="card-title">{item.title}</h5>
                       <p className="card-text">{item.description}</p>
@@ -62,7 +62,7 @@ const SearchTodoList = ({ todoList, handleDelete, handleUpdate }) => {
                         </span>
                       </p>
                       <div className="button-group">
-                        <button className="btn btn-danger" onClick={() => handleDelete(item.id)}>
+                        <button className="btn btn-danger" onClick={() => handleDelete(item._id)}>
                           Delete
                         </button>
                         <EditTodoForm todoList={item} handleUpdate={handleUpdate} />

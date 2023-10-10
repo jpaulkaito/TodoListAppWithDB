@@ -137,6 +137,13 @@ function App() {
             }
           />
         )}
+        {loading ? (
+          <Route path='TodoListAppWithDB/View-all'
+            element={
+              <Loading />
+            }
+          />
+        ) : (
         <Route path='TodoListAppWithDB/View-all'
           element={
             <ViewAllTodoPage
@@ -146,6 +153,14 @@ function App() {
             />
           }
         />
+        )}
+        {loading ? (
+          <Route path='TodoListAppWithDB/Search'
+            element={
+              <Loading />
+            }
+          />
+        ) : (
         <Route path='TodoListAppWithDB/Search'
           element={<SearchPage
             todoList={todoList}
@@ -154,6 +169,7 @@ function App() {
           />
           }
         />
+        )}
         <Route path='TodoListAppWithDB/About'
           element={<AboutPage />}
         />
