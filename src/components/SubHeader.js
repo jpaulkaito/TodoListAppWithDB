@@ -7,7 +7,7 @@ const SubHeader = ({ current, detail }) => {
             <Col>
                 <Breadcrumb>
                     <BreadcrumbItem>
-                        <Link to='/'>Home</Link>
+                        <Link to='/TodoListAppWithDB'>Home</Link>
                     </BreadcrumbItem>
                     {detail && (
                         <BreadcrumbItem>
