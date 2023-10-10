@@ -8,6 +8,8 @@ import ContactPage from './pages/ContactPage';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import { baseUrl } from './app/shared/baseUrl';
+import Loading from './components/Loading';
+
 import './App.css';
 
 async function fetchData() {
@@ -26,14 +28,16 @@ async function fetchData() {
 
 function App() {
   const [todoList, setTodoList] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function fetchDataAsync() {
       try {
         const data = await fetchData();
         setTodoList(data);
+        setLoading(false);
       } catch (error) {
-        // Handle error if needed
+        // Handle error not yet done
       }
     }
 
@@ -115,16 +119,24 @@ function App() {
     <div className="App">
       <Header />
       <Routes>
-        <Route path='TodoListAppWithDB/'
-          element={
-            <HomePage
-              todoList={todoList}
-              handleDelete={handleDelete}
-              handleCreate={handleCreate}
-              handleUpdate={handleUpdate}
-            />
-          }
-        />
+        {loading ? (
+          <Route path='TodoListAppWithDB/'
+            element={
+              <Loading />
+            }
+          />
+        ) : (
+          <Route path='TodoListAppWithDB/'
+            element={
+              <HomePage
+                todoList={todoList}
+                handleDelete={handleDelete}
+                handleCreate={handleCreate}
+                handleUpdate={handleUpdate}
+              />
+            }
+          />
+        )}
         <Route path='TodoListAppWithDB/View-all'
           element={
             <ViewAllTodoPage

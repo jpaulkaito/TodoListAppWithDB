@@ -1,0 +1,23 @@
+npx @google-cloud/functions-framework --target=TodoListAppServer
+gcloud config set project todolistappserver-401504
+gcloud functions deploy TodoListAppServer --trigger-http --runtime nodejs12 --allow-unauthenticated
+
+
+Task: Complete presentation slides
+Description: Create and finalize the slides for the upcoming presentation on project progress.
+
+Task: Grocery shopping
+Description: Purchase groceries for the week, including fruits, vegetables, and other essential items.
+
+Task: Finish coding assignment
+Description: Complete the remaining tasks for the coding assignment due this week.
+
+Task: Book flight tickets
+Description: Research and book flight tickets for the upcoming business trip.
+
+Task: Gym workout
+Description: Hit the gym for a workout session, focusing on cardio and strength training exercises.
+
+https://clipchamp.com/watch/7suQP2HCQ6Z
+
+https://1drv.ms/v/s!Ag6qI1TzjsIJgrAQyGYn_sm3E1lOVg
