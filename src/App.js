@@ -29,6 +29,7 @@ async function fetchData() {
 function App() {
   const [todoList, setTodoList] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [counter, setCounter] = useState(null);
 
   useEffect(() => {
     async function fetchDataAsync() {
@@ -36,27 +37,43 @@ function App() {
         const data = await fetchData();
         setTodoList(data);
         setLoading(false);
+
+
       } catch (error) {
         // Handle error not yet done
       }
     }
 
+    async function incrementCounter() {
+      try {
+        const response = await fetch(`${baseUrl}increment-counter`);
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const data2 = await response.json();
+        console.log('Counter:', data2.counter);
+        setCounter(data2.counter);
+      } catch (error) {
+        console.error('Error incrementing counter:', error);
+      }
+    }
+
+    console.log('Calling incrementCounter');
+    incrementCounter();
     fetchDataAsync();
   }, []);
 
   const handleCreate = (newTask) => {
     setTodoList((prevFilteredItems) => [...prevFilteredItems, newTask]);
-    // Make a POST request to the server to create a new todo
     fetch(baseUrl, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(newTask) // Send the new task as the request body
+      body: JSON.stringify(newTask)
     })
       .then(response => response.json())
       .then(() => {
-        // Fetch the updated todo list from the server
         fetch(baseUrl)
           .then(response => response.json())
           .then(data => setTodoList(data))
@@ -66,7 +83,6 @@ function App() {
   }
 
   const handleDelete = (_id) => {
-    // Make a DELETE request to the server to delete the todo
     fetch(`${baseUrl}${_id}`, {
       method: 'DELETE',
     })
@@ -77,7 +93,6 @@ function App() {
         return response.json();
       })
       .then(() => {
-        // Remove the deleted todo from the todo list
         setTodoList(prevFilteredItems => prevFilteredItems.filter(item => item._id !== _id));
       })
       .catch(error => console.error('Error deleting todo:', error));
@@ -97,7 +112,6 @@ function App() {
         return updatedList;
       });
 
-      // Make a PUT request to update the task on the server
       fetch(`${baseUrl}${updatedTask._id}`, {
         method: 'PUT',
         headers: {
@@ -144,15 +158,15 @@ function App() {
             }
           />
         ) : (
-        <Route path='TodoListAppWithDB/View-all'
-          element={
-            <ViewAllTodoPage
-              todoList={todoList}
-              handleDelete={handleDelete}
-              handleUpdate={handleUpdate}
-            />
-          }
-        />
+          <Route path='TodoListAppWithDB/View-all'
+            element={
+              <ViewAllTodoPage
+                todoList={todoList}
+                handleDelete={handleDelete}
+                handleUpdate={handleUpdate}
+              />
+            }
+          />
         )}
         {loading ? (
           <Route path='TodoListAppWithDB/Search'
@@ -161,14 +175,14 @@ function App() {
             }
           />
         ) : (
-        <Route path='TodoListAppWithDB/Search'
-          element={<SearchPage
-            todoList={todoList}
-            handleDelete={handleDelete}
-            handleUpdate={handleUpdate}
+          <Route path='TodoListAppWithDB/Search'
+            element={<SearchPage
+              todoList={todoList}
+              handleDelete={handleDelete}
+              handleUpdate={handleUpdate}
+            />
+            }
           />
-          }
-        />
         )}
         <Route path='TodoListAppWithDB/About'
           element={<AboutPage />}
@@ -177,7 +191,7 @@ function App() {
           element={<ContactPage />}
         />
       </Routes>
-      <Footer />
+      <Footer counter={counter} />
     </div>
   );
 }

@@ -1,7 +1,7 @@
 import { Container, Row, Col } from 'reactstrap';
 import { Link } from 'react-router-dom';
 
-const Footer = () => {
+const Footer = ({ counter }) => {
     return (
         <footer className='site-footer'>
             <Container>
@@ -23,6 +23,9 @@ const Footer = () => {
                             </li>
                             <li>
                                 <Link to='TodoListAppWithDB/contact'>Contact</Link>
+                            </li>
+                            <li>
+                                <p>Site Visits: {counter !== null ? counter : 'Loading counter...'}</p>
                             </li>
                         </ul>
                     </Col>
